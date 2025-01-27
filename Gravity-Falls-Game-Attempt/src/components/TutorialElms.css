@@ -1,0 +1,130 @@
+.tutorial-elms {
+  /* display: flex;
+    position: absolute; */
+
+  /* display: flex;
+  position: absolute; */
+
+
+  /* top: -330%; */
+
+  /* top: -154%;
+  left: 60%;
+  z-index: 1; */
+
+  /* display: none;
+  opacity: 0; */
+
+
+      /* top: -330%; */
+      display: flex
+      ;
+          position: absolute;
+          /* top: -330%; */
+          top: -305%;
+          left: 57%;
+          /* left: 40%; */
+          width: 37rem;
+          height: 19rem;
+          z-index: 1;
+          align-content: flex-end;
+          flex-wrap: wrap;
+          justify-content: space-evenly;
+          transition: all 0.5s ease-in-out;
+}
+
+.tutorial-elms-content {
+    display: flex;
+    width: 100%;
+    justify-content: space-around;
+}
+
+/* 
+.tutorial-elms.active {
+    top: -305%;
+    opacity: 1;
+    visibility: visible;
+    animation: slideUp 0.5s ease-in-out forwards;
+  }
+  
+  .tutorial-elms.inactive {
+    top: -330%;
+    opacity: 0;
+    visibility: hidden;
+    animation: slideDown 0.5s ease-in-out forwards;
+  }
+
+
+  @keyframes slideUp {
+    from {
+      top: -330%;
+      opacity: 0;
+    }
+    to {
+      top: -305%;
+      opacity: 1;
+    }
+  }
+  
+  @keyframes slideDown {
+    from {
+      top: -305%;
+      opacity: 1;
+    }
+    to {
+      top: -330%;
+      opacity: 0;
+    }
+  } */
+
+/* .tutorial-elms.active {
+    display: flex
+    ;
+        position: absolute;
+        top: -305%;
+        left: 57%;
+        width: 37rem;
+        height: 19rem;
+        z-index: 1;
+        align-content: flex-end;
+        flex-wrap: wrap;
+        justify-content: space-evenly;
+        transition: all 0.5s ease-in-out;
+        opacity: 1;
+} */
+
+.instructions {
+  /* display: flex;
+  flex-direction: column;
+  justify-content: space-around; */
+  /* background: red; */
+  /* height: 9rem; */
+
+
+  display: flex
+  ;
+      flex-direction: column;
+      justify-content: space-around;
+      /* background: red; */
+      height: 9rem;
+      position: relative;
+      bottom: 37%;
+}
+
+.instructions div {
+  background-color: #17233e;
+  border-radius: 20px;
+  box-shadow: 0 0 8px #424242, 0 0 8px #424242;
+  color: #fff;
+  padding: 16px;
+  text-align: center;
+}
+
+.tutorial-elms-img img {
+  /* height: 12rem; */
+
+  height: 12rem;
+  position: relative;
+  top: 3%;
+
+}

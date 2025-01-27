@@ -1,0 +1,37 @@
+footer {
+  display: flex;
+  width: 100%;
+  justify-content: space-between;
+  padding-bottom: 1.2rem;
+
+  /* might remove the position */
+  position: relative;
+}
+
+div button img {
+  height: 40px;
+  width: 40px;
+}
+
+.sound-btns {
+  width: 12rem;
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.sound-btn,
+.tutorial-btn {
+  border-radius: 50%;
+  height: 3.5rem;
+  width: 3.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #a86a25;
+  position: relative;
+  z-index: 1;
+}
+
+.tutorial-btn-wrap {
+    margin-right: 10px;
+}

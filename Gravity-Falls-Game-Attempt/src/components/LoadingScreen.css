@@ -1,0 +1,56 @@
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: white;
+    z-index: 1000;
+  }
+  
+  .loading-screen img {
+    width: 130px;
+    height: auto;
+    position: relative;
+    animation: moveLeft 4s infinite;
+  }
+
+  .span-dots span {
+    display: inline-block;
+    animation: bounce 1s infinite;
+  }
+  
+  .span-dots span:nth-child(1) {
+    animation-delay: 0s;
+  }
+  
+  .span-dots span:nth-child(2) {
+    animation-delay: 0.2s;
+  }
+  
+  .span-dots span:nth-child(3) {
+    animation-delay: 0.4s;
+  }
+  
+  @keyframes bounce {
+    0%, 100% {
+      transform: translateY(0);
+    }
+    50% {
+      transform: translateY(-2px);
+    }
+  }
+
+  @keyframes moveLeft {
+    0% {
+        left: -8%;
+      }
+      100% {
+        left: 10%;
+      }
+  }
