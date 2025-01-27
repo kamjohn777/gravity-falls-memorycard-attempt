@@ -69,18 +69,44 @@ const [showTutorial, setShowTutorial] = useState(false);
                 {/* <button className='sound-btn' id='sound-on' onClick={playClickSound}>
                     <img src={isClicked ? volume : volumeOff} alt="Click Volume"/>
                     </button> */}
-                     <button className='sound-btn' id='sound-off' onClick={toggleSound}>
+                    <motion.button
+                     className='sound-btn'
+                     id='sound-off'
+                     onClick={toggleSound}
+                     initial={{ opacity: 0, y: 50 }}
+                     animate={{ opacity: 1, y: 0 }}
+                     transition={{ duration: 0.5, ease: 'easeInOut' }}
+                   >
+                     {/* <button className='sound-btn' id='sound-off' onClick={toggleSound}> */}
                     <img src={isPlaying ? musicOn : musicOff} alt="Music Control" />
-                    </button>
-                    <button className='sound-btn' id='sound-on' onClick={toggleClickSound}>
+                    {/* </button> */}
+                    </motion.button>
+                    <motion.button
+                    className='sound-btn'
+                    id='sound-on'
+                    onClick={toggleClickSound}
+                    initial={{ opacity: 0, y: 50 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.5, ease: 'easeInOut' }}
+                  >
+                    {/* <button className='sound-btn' id='sound-on' onClick={toggleClickSound}> */}
                     <img src={isClickSoundEnabled ? volume : volumeOff} alt="Click Volume"/>
-                    </button>
+                    {/* </button> */}
+                    </motion.button>
             </div>
 
             <div className='tutorial-btn-wrap'>
-                <button className='tutorial-btn' onClick={toggleTutorial}>
+                <motion.button
+                 className='tutorial-btn'
+                 onClick={toggleTutorial}
+                 initial={{ opacity: 0, y: 50 }}
+                 animate={{ opacity: 1, y: 0 }}
+                 transition={{ duration: 0.5, ease: 'easeInOut' }}
+               >
+                {/* <button className='tutorial-btn' onClick={toggleTutorial}> */}
                     <img src={showTutorial ? cross : questionMarkIcon} alt="Tutorial" />
-                </button>
+                {/* </button> */}
+                </motion.button>
             </div>
 
             {/* {showTutorial && <TutorialElms />} */}
