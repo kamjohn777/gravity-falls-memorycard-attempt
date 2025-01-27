@@ -12,7 +12,7 @@ function HomeScreen() {
 
   const handleBtnClick = (difficulty) => {
     playClickSound();
-    navigate(`/game/${difficulty}`);
+    navigate(`/game/${difficulty.toLowerCase()}`);
   }
 
   return (
