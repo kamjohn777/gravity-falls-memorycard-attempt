@@ -1,8 +1,11 @@
+import { useState, useEffect } from "react";
+import { BrowserRouter as Router, Route, Routes, useLocation } from "react-router-dom";
+import { AnimatePresence } from "framer-motion";
 import "./App.css";
 import video from "./assets/img/camp.mp4";
 import LoadingScreen from "./components/LoadingScreen";
 import HomeScreen from "./components/HomeScreen";
-import { useState, useEffect } from "react";
+import GamePage from "./GamePage";
 import { ClickSoundProvider } from "./components/Context/ClickSoundContext";
 import Footer from "./components/Footer";
 
@@ -16,6 +19,8 @@ function App() {
 
     return () => clearTimeout(timer);
   }, []);
+
+  const location = useLocation();
 
   return (
     <div className="App">
@@ -34,7 +39,12 @@ function App() {
             Your browser does not support the video tag.
           </video>
           <ClickSoundProvider>
-            <HomeScreen />
+            <AnimatePresence exitBeforeEnter>
+              <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<HomeScreen />} />
+                <Route path="/game/:difficulty" element={<GamePage />} />
+              </Routes>
+            </AnimatePresence>
             <Footer />
           </ClickSoundProvider>
         </>
@@ -43,4 +53,12 @@ function App() {
   );
 }
 
-export default App;
+function AppWrapper() {
+  return (
+    <Router>
+      <App />
+    </Router>
+  );
+}
+
+export default AppWrapper;

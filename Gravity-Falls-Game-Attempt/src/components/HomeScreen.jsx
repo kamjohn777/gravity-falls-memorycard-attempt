@@ -2,11 +2,18 @@ import logo from "../assets/img/logo.png";
 import "./HomeScreen.css";
 import { useClickSound } from "./Context/ClickSoundContext";
 import { motion} from "framer-motion";
+import { useNavigate } from "react-router-dom";
 // import Footer from './Footer';
 
 function HomeScreen() {
   const homeScreenBtns = ["Easy", "Medium", "Hard"];
   const { playClickSound } = useClickSound();
+  const navigate = useNavigate();
+
+  const handleBtnClick = (difficulty) => {
+    playClickSound();
+    navigate(`/game/${difficulty}`);
+  }
 
   return (
     //AnimatePresence is used to also animate the exit of the component but since we are rendering it only once we dont need to do this
@@ -24,7 +31,7 @@ function HomeScreen() {
         {homeScreenBtns.map((homeBtns) => {
           return (
             <li key={homeBtns}>
-              <button onClick={playClickSound}>{homeBtns}</button>
+              <button onClick={() => handleBtnClick(homeBtns)}>{homeBtns}</button>
             </li>
           );
         })}
