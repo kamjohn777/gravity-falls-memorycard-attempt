@@ -4,6 +4,7 @@ import Header from "./components/Header"; // Corrected import path
 import { motion } from "framer-motion";
 import characters from "./components/GameComponents/Characters";
 import { shuffleArray } from "./Utils";
+import Tilt from "react-parallax-tilt";
 import "./GamePage.css";
 
 function GamePage() {
@@ -61,12 +62,14 @@ function GamePage() {
         <div className="cardFace">
         {cards.map((card) => (
             
-          <div key={card.id} className="card" onClick={() => handleCardClick(card)}>
+         <Tilt key={card.id}>
+             <div  className="card" onClick={() => handleCardClick(card)}>
             <img src={card.src} alt={card.name} />
             <p>{card.name}</p>
 
             {/* <div class="cardFace"><div class="characterHolder" style="background-image: url(&quot;/memory-card/static/media/ford.0067daebae9115c1423f.png&quot;);"></div><div class="name">Ford</div></div> */}
           </div>
+         </Tilt>
           
         ))}
         </div>
@@ -82,13 +85,13 @@ function GamePage() {
       className="game-page"
     >
       <Header score={score} bestScore={bestScore} />
-      <h2>
+      {/* <h2>
         Game Page - {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
-      </h2>
-      <div className="scoreboard">
+      </h2> */}
+      {/* <div className="scoreboard">
         <div>Score: {score}</div>
         <div>Best score: {bestScore}</div>
-      </div>
+      </div> */}
       {renderGameContent()}
     </motion.div>
   );
