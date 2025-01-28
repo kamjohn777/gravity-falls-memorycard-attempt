@@ -4,6 +4,7 @@ import Header from "./components/Header"; // Corrected import path
 import { motion } from "framer-motion";
 import characters from "./components/GameComponents/Characters";
 import { shuffleArray } from "./Utils";
+import ReactCardFlip from "react-card-flip";
 import Tilt from "react-parallax-tilt";
 import "./GamePage.css";
 
@@ -13,6 +14,7 @@ function GamePage() {
   const [selectedCards, setSelectedCards] = useState([]);
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
+  const [isFlipped, setIsFlipped] = useState({});
 
   useEffect(() => {
     let numCards, numCharacters;
@@ -44,9 +46,29 @@ function GamePage() {
       alert("You lost! You selected the same card twice.");
       setScore(0);
       setSelectedCards([]);
+      setIsFlipped({});
     } else {
       setSelectedCards([...selectedCards, card.id]);
       setScore(score + 1);
+    
+      // Flip all cards
+      const newFlippedState = {};
+      cards.forEach((c) => {
+        newFlippedState[c.id] = true;
+      });
+      setIsFlipped(newFlippedState);
+
+      setTimeout(() => {
+        // Flip all cards back and shuffle them
+        const shuffledCards = shuffleArray(characters).slice(0, cards.length);
+        const resetFlippedState = {};
+        shuffledCards.forEach((c) => {
+          resetFlippedState[c.id] = false;
+        });
+        setIsFlipped(resetFlippedState);
+        setCards(shuffledCards);
+      }, 1000);
+
       if (score + 1 > bestScore) {
         setBestScore(score + 1);
       }
@@ -62,14 +84,24 @@ function GamePage() {
         <div className="cardFace">
         {cards.map((card) => (
             
-         <Tilt className="card-sub-container" key={card.id}>
-             <div  className="card" onClick={() => handleCardClick(card)}>
-            <img src={card.src} alt={card.name} />
-            <p>{card.name}</p>
-
-            {/* <div class="cardFace"><div class="characterHolder" style="background-image: url(&quot;/memory-card/static/media/ford.0067daebae9115c1423f.png&quot;);"></div><div class="name">Ford</div></div> */}
-          </div>
-         </Tilt>
+            <Tilt className="card-sub-container" key={card.id}
+            glareEnable={true}
+            glareMaxOpacity={0.5}
+            glareColor="#ffffff"
+            glarePosition="bottom"
+            >
+            <ReactCardFlip isFlipped={isFlipped[card.id]} flipDirection="horizontal">
+              <div className="card" onClick={() => handleCardClick(card)}>
+                <img src={card.src} alt={card.name} />
+                <p>{card.name}</p>
+              </div>
+              <div className="card" onClick={() => handleCardClick(card)}>
+                <div className="card-back">
+                  <p>Back</p>
+                </div>
+              </div>
+            </ReactCardFlip>
+          </Tilt>
           
         ))}
         </div>
