@@ -1,24 +1,26 @@
-import logo from '../assets/img/logo.png';
-import './Header.css';
-import { useNavigate } from 'react-router-dom';
+import logo from "../assets/img/logo.png";
+import "./Header.css";
+import { useNavigate } from "react-router-dom";
 
-function Header() {
-const navigate = useNavigate();
+//Passing score and bestScore as props to use in the GamePage component
+function Header({ score, bestScore }) {
+  const navigate = useNavigate();
 
-    const LogoBtnToHomeClick = () => {
-        navigate('/');
-    };
+  const LogoBtnToHomeClick = () => {
+    navigate("/");
+  };
 
-    return (
-        <header>
-            <div onClick={LogoBtnToHomeClick} className="headerContainer">
-            <img src={logo} alt='logo-header'/>
-            <div className="score"><div>Score: 0</div><div>Best score: 0</div></div>
-            </div>
-        </header>
-
-        
-    )
+  return (
+    <header>
+      <div className="headerContainer">
+        <img onClick={LogoBtnToHomeClick}  src={logo} alt="logo-header" />
+        <div className="score">
+          <div>Score: {score}</div>
+          <div>Best score: {bestScore}</div>
+        </div>
+      </div>
+    </header>
+  );
 }
 
 export default Header;

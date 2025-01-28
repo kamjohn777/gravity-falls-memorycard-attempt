@@ -81,7 +81,7 @@ function GamePage() {
       transition={{ duration: 0.5, ease: "easeInOut" }}
       className="game-page"
     >
-      <Header />
+      <Header score={score} bestScore={bestScore} />
       <h2>
         Game Page - {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
       </h2>
