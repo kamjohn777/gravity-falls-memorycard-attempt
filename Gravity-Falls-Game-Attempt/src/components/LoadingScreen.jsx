@@ -1,7 +1,6 @@
-import { useEffect, useState } from 'react';
-// import App from '../App';
-import loadingGif from '../assets/img/dipper_running.gif';
-import './LoadingScreen.css';
+import { useEffect, useState } from "react";
+import loadingGif from "../assets/img/dipper_running.gif";
+import "./LoadingScreen.css";
 
 function LoadingScreen() {
   const [isLoading, setIsLoading] = useState(true);
@@ -20,8 +19,15 @@ function LoadingScreen() {
     isLoading && (
       <div className="loading-screen">
         <img src={loadingGif} alt="Loading..." />
-        <p>Loading<span className='span-dots'><span>.</span><span>.</span><span>.</span></span></p>
-        </div>
+        <p>
+          Loading
+          <span className="span-dots">
+            <span>.</span>
+            <span>.</span>
+            <span>.</span>
+          </span>
+        </p>
+      </div>
     )
   );
 }

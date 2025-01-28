@@ -6,7 +6,16 @@
   justify-content: space-between;
   margin: 0 auto;
   max-width: 1700px;
-  padding: 20px 30px 0;
+  padding: 20px 40px 0;
+}
+
+.headerContainer img {
+    height: 9rem;
+    transition: all 0.3s ease-in-out;
+}
+
+.headerContainer img:hover {
+    transform: scale(1.1);
 }
 
 .score {

@@ -6,6 +6,7 @@ footer {
 
   /* might remove the position */
   position: relative;
+  z-index: 1;
 }
 
 div button img {
