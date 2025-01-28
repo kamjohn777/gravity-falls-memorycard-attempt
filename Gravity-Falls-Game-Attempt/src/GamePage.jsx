@@ -62,7 +62,7 @@ function GamePage() {
         <div className="cardFace">
         {cards.map((card) => (
             
-         <Tilt key={card.id}>
+         <Tilt className="card-sub-container" key={card.id}>
              <div  className="card" onClick={() => handleCardClick(card)}>
             <img src={card.src} alt={card.name} />
             <p>{card.name}</p>
