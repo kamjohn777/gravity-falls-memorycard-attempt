@@ -86,9 +86,9 @@ function GamePage() {
             
             <Tilt className="card-sub-container" key={card.id}
             glareEnable={true}
-            glareMaxOpacity={0.35}
+            glareMaxOpacity={0.25}
             glareColor="#ffffff"
-            glarePosition="bottom"
+            glarePosition="all"
             glareBorderRadius="10px"
             perspective={700}
             scale={1.02}
