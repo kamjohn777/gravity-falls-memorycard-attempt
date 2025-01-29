@@ -86,9 +86,12 @@ function GamePage() {
             
             <Tilt className="card-sub-container" key={card.id}
             glareEnable={true}
-            glareMaxOpacity={0.5}
+            glareMaxOpacity={0.35}
             glareColor="#ffffff"
             glarePosition="bottom"
+            glareBorderRadius="10px"
+            perspective={700}
+            scale={1.02}
             >
             <ReactCardFlip isFlipped={isFlipped[card.id]} flipDirection="horizontal">
               <div className="card" onClick={() => handleCardClick(card)}>
