@@ -34,6 +34,7 @@ function Footer() {
 
   const toggleTutorial = () => {
     setShowTutorial(!showTutorial);
+    // clickAudio.play();
   };
 
   return (
