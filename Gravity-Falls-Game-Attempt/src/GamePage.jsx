@@ -6,6 +6,7 @@ import characters from "./components/GameComponents/Characters";
 import { shuffleArray } from "./Utils";
 import ReactCardFlip from "react-card-flip";
 import Tilt from "react-parallax-tilt";
+import OutComeDisplay from "./components/OutcomeDisplay";
 import "./GamePage.css";
 
 function GamePage() {
@@ -15,6 +16,7 @@ function GamePage() {
   const [score, setScore] = useState(0);
   const [bestScore, setBestScore] = useState(0);
   const [isFlipped, setIsFlipped] = useState({});
+  const [gameState, setGameState] = useState(null);
 
   useEffect(() => {
     let numCards, numCharacters;
@@ -24,11 +26,11 @@ function GamePage() {
         numCharacters = 5;
         break;
       case "medium":
-        numCards = 5;
+        numCards = 4;
         numCharacters = 7;
         break;
       case "hard":
-        numCards = 7;
+        numCards = 5;
         numCharacters = 10;
         break;
       default:
@@ -43,14 +45,15 @@ function GamePage() {
 
   const handleCardClick = (card) => {
     if (selectedCards.includes(card.id)) {
-      alert("You lost! You selected the same card twice.");
+    //   alert("You lost! You selected the same card twice.");
+    setGameState("lost")
       setScore(0);
       setSelectedCards([]);
       setIsFlipped({});
     } else {
       setSelectedCards([...selectedCards, card.id]);
       setScore(score + 1);
-    
+
       // Flip all cards
       const newFlippedState = {};
       cards.forEach((c) => {
@@ -75,38 +78,59 @@ function GamePage() {
       if (selectedCards.length === 0) {
         setCards(shuffleArray(cards));
       }
+
+      if (score + 1 === cards.length) {
+        setGameState("won");
+      }
     }
+  };
+
+  const resetGame = () => {
+    setGameState(null);
+    setScore(0);
+    setSelectedCards([]);
+        setIsFlipped([]);
+        const selectedCharacters = shuffleArray(characters).slice(0, cards.length);
+    const gameCards = shuffleArray(selectedCharacters).slice(0, cards.length);
+    setCards(gameCards);
+    
   };
 
   const renderGameContent = () => {
     return (
       <div className="cards-container">
         <div className="cardFace">
-        {cards.map((card) => (
-            
-            <Tilt className="card-sub-container" key={card.id}
-            glareEnable={true}
-            glareMaxOpacity={0.25}
-            glareColor="#ffffff"
-            glarePosition="all"
-            glareBorderRadius="10px"
-            perspective={700}
-            scale={1.02}
+          {cards.map((card) => (
+            <Tilt
+            // onClick={() => handleCardClick(card)}
+            //   className="card-sub-container"
+              key={card.id}
+            //   glareEnable={true}
+            //   glareMaxOpacity={0.25}
+            //   glareColor="#ffffff"
+            //   glarePosition="all"
+            //   glareBorderRadius="10px"
+            //   perspective={700}
+            //   scale={1.02}
             >
-            <ReactCardFlip isFlipped={isFlipped[card.id]} flipDirection="horizontal">
-              <div className="card" onClick={() => handleCardClick(card)}>
-                <img src={card.src} alt={card.name} />
-                <p>{card.name}</p>
-              </div>
-              <div className="card" onClick={() => handleCardClick(card)}>
-                <div className="card-back">
-                  <p>Back</p>
+              <ReactCardFlip
+                className="card-flip-wrap"
+                isFlipped={isFlipped[card.id]}
+                flipDirection="horizontal"
+                // onClick={() => handleCardClick(card.id)}
+              >
+                <div className="card" onClick={() => handleCardClick(card)}>
+                  <img src={card.src} alt={card.name} />
+                  <p>{card.name}</p>
                 </div>
-              </div>
-            </ReactCardFlip>
-          </Tilt>
-          
-        ))}
+                <div className="card" onClick={() => handleCardClick(card)}>
+                  <div className="card-back">
+                    {/* <p>Back</p> */}
+                  </div>
+                </div>
+              </ReactCardFlip>
+            </Tilt>
+          ))}
         </div>
       </div>
     );
@@ -119,15 +143,12 @@ function GamePage() {
       transition={{ duration: 0.5, ease: "easeInOut" }}
       className="game-page"
     >
-      <Header score={score} bestScore={bestScore} />
-      {/* <h2>
-        Game Page - {difficulty.charAt(0).toUpperCase() + difficulty.slice(1)}
-      </h2> */}
-      {/* <div className="scoreboard">
-        <div>Score: {score}</div>
-        <div>Best score: {bestScore}</div>
-      </div> */}
-      {renderGameContent()}
+     <Header score={score} bestScore={bestScore} />
+      {gameState ? (
+        <OutComeDisplay gameState={gameState} onReset={resetGame} />
+      ) : (
+        renderGameContent()
+      )}
     </motion.div>
   );
 }
