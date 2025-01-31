@@ -123,9 +123,10 @@ function GamePage() {
           ))}
         </div>
         <div className="score-count">
-            <p>{score}</p><span>/</span>
-            <p>{winCondition}</p>
-          </div>
+          <p>{score}</p>
+          <span>/</span>
+          <p>{winCondition}</p>
+        </div>
       </div>
     );
   };
