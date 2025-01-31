@@ -8,10 +8,11 @@ function OutComeDisplay({ gameState, onReset }) {
   const backgroundColor = gameState === "lost" ? "red" : "blue";
   const message = gameState === "lost" ? "You lost!" : "You won!";
   const messageClass = gameState === "lost" ? "message-lost" : "message-won";
+  const outcomeClass = gameState === "lost" ? "outcome-lost" : "outcome-won";
 
   return (
     <motion.div
-      className="outcome-display"
+      className={`outcome-display ${outcomeClass}`}
       key="modal"
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
@@ -19,7 +20,7 @@ function OutComeDisplay({ gameState, onReset }) {
       exit={{ opacity: 0 }}
       style={{ backgroundImage, backgroundColor }}
     >
-      <div>
+      <div className="outcome-text-wrap">
         <p className={messageClass}>{message}</p>
         <button onClick={onReset}>Reset</button>
       </div>
