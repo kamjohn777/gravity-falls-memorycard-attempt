@@ -123,3 +123,14 @@
     /* background-color: #ccc; */
     /* border-radius: 8px; */
   }
+
+  .score-count {
+    display: flex
+;
+    justify-content: space-evenly;
+    align-items: center;
+    width: 4rem;
+    /* background: red; */
+    font-size: 1.4rem;
+    color: white;
+  }

@@ -17,36 +17,41 @@ function GamePage() {
   const [bestScore, setBestScore] = useState(0);
   const [isFlipped, setIsFlipped] = useState({});
   const [gameState, setGameState] = useState(null);
+  const [winCondition, setWinCondition] = useState(5); // Default win condition
 
   useEffect(() => {
-    let numCards, numCharacters;
+    let numCards, numCharacters, winCondition;
     switch (difficulty) {
       case "easy":
         numCards = 3;
         numCharacters = 5;
+        winCondition = 5;
         break;
       case "medium":
         numCards = 4;
         numCharacters = 7;
+        winCondition = 7;
         break;
       case "hard":
         numCards = 5;
         numCharacters = 10;
+        winCondition = 10;
         break;
       default:
         numCards = 3;
         numCharacters = 5;
+        winCondition = 5;
     }
 
     const selectedCharacters = shuffleArray(characters).slice(0, numCharacters);
     const gameCards = shuffleArray(selectedCharacters).slice(0, numCards);
     setCards(gameCards);
+    setWinCondition(winCondition); // Set the win condition based on difficulty
   }, [difficulty]);
 
   const handleCardClick = (card) => {
     if (selectedCards.includes(card.id)) {
-    //   alert("You lost! You selected the same card twice.");
-    setGameState("lost")
+      setGameState("lost");
       setScore(0);
       setSelectedCards([]);
       setIsFlipped({});
@@ -79,7 +84,7 @@ function GamePage() {
         setCards(shuffleArray(cards));
       }
 
-      if (score + 1 === cards.length) {
+      if (score + 1 === winCondition) {
         setGameState("won");
       }
     }
@@ -89,11 +94,10 @@ function GamePage() {
     setGameState(null);
     setScore(0);
     setSelectedCards([]);
-        setIsFlipped([]);
-        const selectedCharacters = shuffleArray(characters).slice(0, cards.length);
+    setIsFlipped({});
+    const selectedCharacters = shuffleArray(characters).slice(0, cards.length);
     const gameCards = shuffleArray(selectedCharacters).slice(0, cards.length);
     setCards(gameCards);
-    
   };
 
   const renderGameContent = () => {
@@ -101,37 +105,27 @@ function GamePage() {
       <div className="cards-container">
         <div className="cardFace">
           {cards.map((card) => (
-            <Tilt
-            // onClick={() => handleCardClick(card)}
-            //   className="card-sub-container"
-              key={card.id}
-            //   glareEnable={true}
-            //   glareMaxOpacity={0.25}
-            //   glareColor="#ffffff"
-            //   glarePosition="all"
-            //   glareBorderRadius="10px"
-            //   perspective={700}
-            //   scale={1.02}
-            >
+            <Tilt key={card.id}>
               <ReactCardFlip
                 className="card-flip-wrap"
                 isFlipped={isFlipped[card.id]}
                 flipDirection="horizontal"
-                // onClick={() => handleCardClick(card.id)}
               >
                 <div className="card" onClick={() => handleCardClick(card)}>
                   <img src={card.src} alt={card.name} />
                   <p>{card.name}</p>
                 </div>
                 <div className="card" onClick={() => handleCardClick(card)}>
-                  <div className="card-back">
-                    {/* <p>Back</p> */}
-                  </div>
+                  <div className="card-back"></div>
                 </div>
               </ReactCardFlip>
             </Tilt>
           ))}
         </div>
+        <div className="score-count">
+            <p>{score}</p><span>/</span>
+            <p>{winCondition}</p>
+          </div>
       </div>
     );
   };
@@ -143,7 +137,7 @@ function GamePage() {
       transition={{ duration: 0.5, ease: "easeInOut" }}
       className="game-page"
     >
-     <Header score={score} bestScore={bestScore} />
+      <Header score={score} bestScore={bestScore} />
       {gameState ? (
         <OutComeDisplay gameState={gameState} onReset={resetGame} />
       ) : (

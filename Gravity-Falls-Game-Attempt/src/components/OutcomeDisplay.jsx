@@ -1,3 +1,5 @@
+import React from "react";
+import PropTypes from "prop-types";
 import lost from "../assets/img/lost.jpg";
 import win from "../assets/img/won.avif";
 import { motion } from "framer-motion";
@@ -27,5 +29,6 @@ function OutComeDisplay({ gameState, onReset }) {
     </motion.div>
   );
 }
+
 
 export default OutComeDisplay;
