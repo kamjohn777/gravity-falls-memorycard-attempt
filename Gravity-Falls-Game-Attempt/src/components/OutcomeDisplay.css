@@ -1,0 +1,47 @@
+.outcome-display {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 70%;
+  height: 65%;
+  background-size: cover;
+  background-position: center;
+  border-radius: 20px;
+  margin: auto;
+}
+
+
+.message-container {
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background for better text readability */
+    padding: 20px;
+    border-radius: 10px;
+  }
+
+
+/* .outcome-display button {
+  margin-top: 20px;
+  padding: 10px 20px;
+  font-size: 16px;
+  cursor: pointer;
+} */
+
+.message-lost {
+    background-color: red;
+  }
+  
+  .message-won {
+    background-color: blue;
+  }
+  
+
+.outcome-display button {
+    margin-top: 20px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    background-color: white;
+    color: black;
+    border: none;
+    border-radius: 5px;
+  }
