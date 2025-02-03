@@ -7,6 +7,7 @@ import { shuffleArray } from "./Utils";
 import ReactCardFlip from "react-card-flip";
 import Tilt from "react-parallax-tilt";
 import OutComeDisplay from "./components/OutcomeDisplay";
+// import cardFlipSound from "./assets/sounds/flip.mp3"
 import "./GamePage.css";
 
 function GamePage() {
@@ -18,6 +19,7 @@ function GamePage() {
   const [isFlipped, setIsFlipped] = useState({});
   const [gameState, setGameState] = useState(null);
   const [winCondition, setWinCondition] = useState(5); // Default win condition
+  const [isFlipping, setIsFlipping] = useState(false); // Track if flip animation is in progress
 
   useEffect(() => {
     let numCards, numCharacters, winCondition;
@@ -59,6 +61,9 @@ function GamePage() {
       setSelectedCards([...selectedCards, card.id]);
       setScore(score + 1);
 
+      // Disable scaling, tilt, and glare during flip animation
+      setIsFlipping(true);
+
       // Flip all cards
       const newFlippedState = {};
       cards.forEach((c) => {
@@ -75,6 +80,9 @@ function GamePage() {
         });
         setIsFlipped(resetFlippedState);
         setCards(shuffledCards);
+
+        // Re-enable scaling, tilt, and glare after flip animation
+        setIsFlipping(false);
       }, 1000);
 
       if (score + 1 > bestScore) {
@@ -105,7 +113,16 @@ function GamePage() {
       <div className="cards-container">
         <div className="cardFace">
           {cards.map((card) => (
-            <Tilt key={card.id}>
+            <Tilt
+              key={card.id}
+              glareEnable={!isFlipping && !isFlipped[card.id]}
+              glareMaxOpacity={0.45}
+              glareColor="#ffffff"
+              glarePosition="all"
+              glareBorderRadius="10px"
+              scale={isFlipping ? 1 : 1.05} // Disable scaling during flip animation
+              tiltEnable={!isFlipping} // Disable tilt during flip animation
+            >
               <ReactCardFlip
                 className="card-flip-wrap"
                 isFlipped={isFlipped[card.id]}
